@@ -19,7 +19,7 @@
               [immutant.web.internal.headers :as hdr]
               [immutant.internal.util        :refer [try-resolve]])
     (:import [java.io File InputStream OutputStream]
-             clojure.lang.PersistentHashMap))
+             clojure.lang.PersistentHashMap java.net.URL))
 
 (defprotocol Session
   (attribute [session key])
@@ -171,7 +171,7 @@
 (when (try-resolve 'ring.util.response/resource-data)
   (eval
     '(defmethod ring.util.response/resource-data :vfs
-       [url]
+       [^java.net.URLConnection url]
        (let [conn (.openConnection url)
              vfile (.getContent conn)]
          (when-not (.isDirectory vfile)

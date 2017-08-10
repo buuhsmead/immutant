@@ -23,7 +23,9 @@ if [ ! -d ${jboss_home} ]; then
             echo "Error: EAP_ARCHIVE_DIR not set"
             exit 1
         fi
-        tar xf ${EAP_ARCHIVE_DIR}/EAP-${version}.tar.gz
+#        tar xf ${EAP_ARCHIVE_DIR}/EAP-${version}.tar.gz
+	unzip ${EAP_ARCHIVE_DIR}/jboss-eap-7.0.0.zip
+        jboss_home="${dest_dir}/jboss-eap-7.0"
     fi
     cd -
 fi
